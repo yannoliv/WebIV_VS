@@ -12,6 +12,9 @@ import { HeaderComponent } from './navigation/header/header.component';
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { SidenavListComponent } from './navigation/sidenav-list/sidenav-list.component';
 import { FooterComponent } from './navigation/footer/footer.component';
+import { EvenementenComponent } from './evenementen/evenementen.component';
+import { EvenementComponent } from './evenementen/evenement/evenement.component';
+import { EvenementListComponent } from './evenementen/evenement-list/evenement-list.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +22,10 @@ import { FooterComponent } from './navigation/footer/footer.component';
     HeaderComponent,
     IndexComponent,
     SidenavListComponent,
-    FooterComponent
+    FooterComponent,
+    EvenementenComponent,
+    EvenementComponent,
+    EvenementListComponent
   ],
   imports: [
     BrowserModule,
