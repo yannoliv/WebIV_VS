@@ -186,6 +186,14 @@
     <Compile Include="Migrations\201903140957373_Initial.Designer.cs">
       <DependentUpon>201903140957373_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903141028329_Initial1.cs" />
+    <Compile Include="Migrations\201903141028329_Initial1.Designer.cs">
+      <DependentUpon>201903141028329_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201903141030477_locatietoevoegen.cs" />
+    <Compile Include="Migrations\201903141030477_locatietoevoegen.Designer.cs">
+      <DependentUpon>201903141030477_locatietoevoegen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Domain\Categorie.cs" />
     <Compile Include="Models\Domain\Evenement.cs" />
@@ -212,6 +220,12 @@
     <EmbeddedResource Include="Migrations\201903140957373_Initial.resx">
       <DependentUpon>201903140957373_Initial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903141028329_Initial1.resx">
+      <DependentUpon>201903141028329_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903141030477_locatietoevoegen.resx">
+      <DependentUpon>201903141030477_locatietoevoegen.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
@@ -231,7 +245,9 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52019</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52019/</IISUrl>
+          <IISUrl>http://localhost:8080</IISUrl>
+          <OverrideIISAppRootUrl>True</OverrideIISAppRootUrl>
+          <IISAppRootUrl>http://localhost:8080</IISAppRootUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
