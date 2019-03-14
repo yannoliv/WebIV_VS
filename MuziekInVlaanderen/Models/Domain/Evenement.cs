@@ -15,12 +15,13 @@ namespace MuziekInVlaanderen.Models.Domain
         public Categorie Categorie { get; set; }
 
         [Required]
-        public Locatie Locatie { get; set; }
+        public string Locatie { get; set; }
 
         [Required]
         public string Beschrijving { get; set; }
 
         [Required]
         public DateTime Datum { get; set; }
+        
     }
 }
