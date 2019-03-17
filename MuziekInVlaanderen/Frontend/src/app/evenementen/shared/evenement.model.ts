@@ -1,10 +1,21 @@
 import {Categorie} from "./categorie.model";
 export class Evenement {
-    Id:number;
-    Titel:string;
-    Categorie:Categorie;
-    Locatie:string;
-    Beschrijving:string;
-    Datum:Date;
+    constructor(
+        _id:number,
+        _titel:string,
+        _categorie:Categorie,
+        _locatie:string,
+        _beschrijving:string,
+        _datum:Date,
+        _file:string
+    ){}
+
+    static fromJSON(json: any): Evenement {
+        const rec = new Evenement(json.id, json.titel, json.categorie, json.locatie, json.beschrijving,
+            json.datum,json.file);
+        return rec;
+    }
+    
 
 }
+

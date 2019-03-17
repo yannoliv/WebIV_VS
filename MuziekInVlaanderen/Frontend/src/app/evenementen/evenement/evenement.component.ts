@@ -1,7 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms'
-
-import {EvenementService} from '../shared/evenement.service'
+import { Component, OnInit, Input } from '@angular/core';
 
 @Component({
   selector: 'app-evenement',
@@ -9,24 +6,9 @@ import {EvenementService} from '../shared/evenement.service'
   styleUrls: ['./evenement.component.css']
 })
 export class EvenementComponent implements OnInit {
-
-  constructor(private evenementService: EvenementService) { }
+  
+  constructor() { }
 
   ngOnInit() {
-    this.resetForm();
   }
-
-  resetForm(form?: NgForm) {
-    if (form != null)
-      form.reset();
-    this.evenementService.selectedEvenement = {
-      Id:0,
-      Titel:'Test',
-      Beschrijving:'',
-      Categorie:null,
-      Locatie:'',
-      Datum:null
-    }
-  }
-
 }

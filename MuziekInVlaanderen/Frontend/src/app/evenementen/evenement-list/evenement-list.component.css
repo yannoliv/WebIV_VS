@@ -1,6 +1,19 @@
-ul{
-    list-style: none;
-}
-ul li{
+.col-sm-6{
     padding:10px;
+    float:left;
 }
+
+/* Kaartjes even groot maken */
+.row-eq-height {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display:         flex;
+  }
+  .mat-card {
+      height:100%;
+  }
+
+  .hidden{
+      display:none;
+  }

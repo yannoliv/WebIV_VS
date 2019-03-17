@@ -1,7 +1,8 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, MatMenuModule, MatDividerModule, MatCardModule } from '@angular/material';
+import { MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, 
+  MatMenuModule, MatDividerModule, MatCardModule, MatRadioModule } from '@angular/material';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -39,6 +40,7 @@ import { EvenementListComponent } from './evenementen/evenement-list/evenement-l
     MatMenuModule,
     MatDividerModule,
     MatCardModule,
+    MatRadioModule,
     FormsModule,
     RoutingModule,
     FlexLayoutModule

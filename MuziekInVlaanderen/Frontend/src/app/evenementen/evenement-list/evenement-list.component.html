@@ -1,14 +1,37 @@
-Evenement lijst
-<mat-card class="example-card" *ngFor="let evenement of evenementService.evenementen">
-  <mat-card-header>
-    <mat-card-title>{{evenement.Titel}}</mat-card-title>
-    <mat-card-subtitle>{{evenement.Locatie}}</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <p>{{evenement.Beschrijving}}</p>
-  </mat-card-content>
-  <mat-card-actions>
-    <button mat-button color="primary">LIKE</button>
-    <button mat-button color="accent">SHARE</button>
-  </mat-card-actions>
-</mat-card>
+<h3>Gekozen categorie: {{geselecteerdeCategorie}}</h3>
+<ng-container *ngFor="let evenement of evenementService.evenementen">
+  <div class="col-sm-6" *ngIf="Categorie[evenement.Categorie] == geselecteerdeCategorie;">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>{{evenement.Titel}}</mat-card-title>
+        <mat-card-subtitle>{{evenement.Locatie}}</mat-card-subtitle>
+      </mat-card-header>
+      <img mat-card-image src="../../../assets/{{evenement.File}}" alt="Photo of a Shiba Inu">
+      <mat-card-content>
+        <p>{{evenement.Beschrijving}}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button color="primary">LIKE</button>
+        <button mat-button color="accent">SHARE</button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <div class="col-sm-6" *ngIf="!geselecteerdeCategorie">
+      <mat-card>
+          <mat-card-header>
+            <mat-card-title>{{evenement.Titel}}</mat-card-title>
+            <mat-card-subtitle>{{evenement.Locatie}}</mat-card-subtitle>
+          </mat-card-header>
+          <img mat-card-image src="../../../assets/{{evenement.File}}" alt="Photo of a Shiba Inu">
+          <mat-card-content>
+            <p>{{evenement.Beschrijving}}</p>
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-button color="primary">LIKE</button>
+            <button mat-button color="accent">SHARE</button>
+          </mat-card-actions>
+        </mat-card>
+  </div>
+</ng-container>
+<!--Deze row dient om alles wat eronder staat, eronder te houden.-->
+<div class="row" style="width:100%;float:none;"></div>
