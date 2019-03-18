@@ -1,8 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule, MatToolbarModule, MatSidenavModule, MatIconModule, MatListModule, 
-  MatMenuModule, MatDividerModule, MatCardModule, MatRadioModule } from '@angular/material';
+import {DemoMaterialModule} from '../../src/material';
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent } from './app.component';
@@ -16,6 +15,7 @@ import { FooterComponent } from './navigation/footer/footer.component';
 import { EvenementenComponent } from './evenementen/evenementen.component';
 import { EvenementComponent } from './evenementen/evenement/evenement.component';
 import { EvenementListComponent } from './evenementen/evenement-list/evenement-list.component';
+import { CarouselComponent } from './index/carousel/carousel.component';
 
 @NgModule({
   declarations: [
@@ -26,26 +26,20 @@ import { EvenementListComponent } from './evenementen/evenement-list/evenement-l
     FooterComponent,
     EvenementenComponent,
     EvenementComponent,
-    EvenementListComponent
+    EvenementListComponent,
+    CarouselComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MatButtonModule,
     LayoutModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatIconModule,
-    MatListModule,
-    MatMenuModule,
-    MatDividerModule,
-    MatCardModule,
-    MatRadioModule,
+    DemoMaterialModule,
     FormsModule,
     RoutingModule,
     FlexLayoutModule
   ],
   bootstrap: [AppComponent],
-  providers: []
+  providers: [],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }

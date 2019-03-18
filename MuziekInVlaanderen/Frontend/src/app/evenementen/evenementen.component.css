@@ -14,3 +14,9 @@
     margin: 15px 0;
   }
   
+@media screen and (max-width: 768px) {
+  .mat-drawer.mat-drawer-side{
+    display:contents;
+    visibility: visible
+  }
+}
