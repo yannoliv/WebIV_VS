@@ -1,4 +1,5 @@
-﻿using MuziekInVlaanderen.Models.Domain;
+﻿using Microsoft.EntityFrameworkCore;
+using MuziekInVlaanderen.Models.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,39 +9,50 @@ namespace MuziekInVlaanderen.Data.Repositories
 {
     public class EvenementRepository : IEvenementRepository
     {
+
+        private readonly ApplicationDbContext _context;
+        private readonly DbSet<Evenement> _evenementen;
+
+        public EvenementRepository(ApplicationDbContext context)
+        {
+            this._context = context;
+            this._evenementen = context.Evenementen;
+        }
+
         public void Add(Evenement evenement)
         {
-            throw new NotImplementedException();
+            this._evenementen.Add(evenement);
         }
 
         public void Delete(Evenement evenement)
         {
-            throw new NotImplementedException();
+            this._evenementen.Remove(evenement);
         }
 
         public IEnumerable<Evenement> GetAll()
         {
-            throw new NotImplementedException();
+            return this._evenementen.Include(e => e.Locatie).Include(e => e.Categorie).ToList();
         }
 
         public Evenement GetBy(int id)
         {
-            throw new NotImplementedException();
+            return this._evenementen.Include(e => e.Locatie).Include(e => e.Categorie).FirstOrDefault(e => e.Id == id);
         }
 
         public void SaveChanges()
         {
-            throw new NotImplementedException();
+            this._context.SaveChanges();
         }
 
         public bool TryGetEvenement(int id, out Evenement evenement)
         {
-            throw new NotImplementedException();
+            evenement = _context.Evenementen.Include(e => e.Locatie).Include(e => e.Categorie).FirstOrDefault(e => e.Id == id);
+            return evenement != null;
         }
 
         public void Update(Evenement evenement)
         {
-            throw new NotImplementedException();
+            this._evenementen.Update(evenement);
         }
     }
 }
