@@ -23,9 +23,8 @@ namespace MuziekInVlaanderen.Models.Domain
         [Required]
         public DateTime Datum { get; set; }
 
-        public Evenement(int id, string titel, Categorie categorie, Plaats locatie, string beschrijving, DateTime datum)
+        public Evenement(string titel, Categorie categorie, Plaats locatie, string beschrijving, DateTime datum)
         {
-            Id = id;
             Titel = titel;
             Categorie = categorie;
             Locatie = locatie;

@@ -34,6 +34,7 @@ namespace MuziekInVlaanderen
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
+            
             services.AddScoped<EvenementenDataInitializer>();
             services.AddScoped<IEvenementRepository, EvenementRepository>();
             services.AddSession();
