@@ -31,12 +31,13 @@ namespace MuziekInVlaanderen.Data.Repositories
 
         public IEnumerable<Evenement> GetAll()
         {
-            return this._evenementen.Include(e => e.Locatie).Include(e => e.Categorie).ToList();
+            Console.Write(_evenementen);
+            return this._evenementen.ToList();
         }
 
         public Evenement GetBy(int id)
         {
-            return this._evenementen.Include(e => e.Locatie).Include(e => e.Categorie).FirstOrDefault(e => e.Id == id);
+            return this._evenementen.FirstOrDefault(e => e.Id == id);
         }
 
         public void SaveChanges()
