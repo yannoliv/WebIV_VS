@@ -4,19 +4,20 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Web;
+using Microsoft.EntityFrameworkCore;
 
 namespace MuziekInVlaanderen.Data
 {
     public class ApplicationDbContext : DbContext
     {
-        public ApplicationDbContext() :
-          base("OktaConnectionString")
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) 
+            : base(options)
         {
         }
 
-        public static ApplicationDbContext Create()
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            return new ApplicationDbContext();
+
         }
 
         public DbSet<Evenement> Evenementen { get; set; }
