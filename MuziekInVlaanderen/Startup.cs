@@ -37,6 +37,7 @@ namespace MuziekInVlaanderen
             services.AddScoped<EvenementenDataInitializer>();
             services.AddScoped<IEvenementRepository, EvenementRepository>();
             services.AddSession();
+            services.AddOpenApiDocument();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -56,6 +57,9 @@ namespace MuziekInVlaanderen
 
             app.UseHttpsRedirection();
             app.UseMvc();
+
+            app.UseSwaggerUi3();
+            app.UseSwagger();
 
             initializer.InitializeData();
         }
