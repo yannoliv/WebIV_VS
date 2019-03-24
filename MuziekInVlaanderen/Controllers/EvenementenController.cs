@@ -19,13 +19,21 @@ namespace MuziekInVlaanderen.Controllers
             Console.Write(_evenementRepository.GetAll());
         }
 
-        // GET: api/Evenementen
+        /// <summary>
+        /// Get alle evenementen
+        /// </summary>
+        /// <returns>Het evenement</returns>
         [HttpGet]
         public IEnumerable<Evenement> GetEvenementen()
         {
             return _evenementRepository.GetAll();
         }
 
+        /// <summary>
+        /// Get evenement via Id
+        /// </summary>
+        /// <param name="id">Het Id van het evenement</param>
+        /// <returns>Het evenement</returns>
         [HttpGet("{id}")]
         public ActionResult<Evenement> GetEvenement(int id)
         {
@@ -34,7 +42,11 @@ namespace MuziekInVlaanderen.Controllers
             return evenement;
         }
 
-
+        /// <summary>
+        /// Post een evenement
+        /// </summary>
+        /// <param name="evenement">Het evenement die je wilt posten</param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult<Evenement> PostEvenement(Evenement evenement)
         {
@@ -43,6 +55,12 @@ namespace MuziekInVlaanderen.Controllers
             return CreatedAtAction(nameof(GetEvenement), new { id = evenement.Id }, evenement);
         }
 
+        /// <summary>
+        /// Update een evenement
+        /// </summary>
+        /// <param name="id">Het Id van het evenement</param>
+        /// <param name="evenement">Het nieuwe evenement</param>
+        /// <returns></returns>
         [HttpPut("{id}")]
         public IActionResult PutEvenement(int id, Evenement evenement)
         {
@@ -56,6 +74,11 @@ namespace MuziekInVlaanderen.Controllers
             return NoContent();
         }
 
+        /// <summary>
+        /// Verwijder een evenement
+        /// </summary>
+        /// <param name="id">Het Id van het evenement</param>
+        /// <returns></returns>
         [HttpDelete("{id}")]
         public ActionResult<Evenement> DeleteEvenement(int id)
         {

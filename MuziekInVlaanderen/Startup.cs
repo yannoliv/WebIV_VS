@@ -38,7 +38,15 @@ namespace MuziekInVlaanderen
             services.AddScoped<EvenementenDataInitializer>();
             services.AddScoped<IEvenementRepository, EvenementRepository>();
             services.AddSession();
-            services.AddOpenApiDocument();
+            services.AddOpenApiDocument(c => 
+            {
+                c.DocumentName = "apidocs";
+                c.Title = "MuziekInVlaanderenAPI";
+                c.Version = "v1";
+                c.Description = "The MuziekInVlaanderenAPI documentation description.";
+            });
+
+            services.AddCors(options => options.AddPolicy("AllowAllOrigins", builder => builder.AllowAnyOrigin()));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
@@ -61,6 +69,7 @@ namespace MuziekInVlaanderen
 
             app.UseSwaggerUi3();
             app.UseSwagger();
+            app.UseCors("AllowAllOrigins");
 
             initializer.InitializeData();
         }

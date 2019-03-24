@@ -5,6 +5,7 @@ namespace MuziekInVlaanderen.Models.Domain
 {
     public class Evenement
     {
+        #region Properties
         [Key]
         public int Id { get; set; }
 
@@ -21,7 +22,8 @@ namespace MuziekInVlaanderen.Models.Domain
         public string Beschrijving { get; set; }
 
         [Required]
-        public DateTime Datum { get; set; }
+        public DateTime Datum { get; set; } 
+        #endregion
 
         public Evenement(string titel, Categorie categorie, Plaats locatie, string beschrijving, DateTime datum)
         {
