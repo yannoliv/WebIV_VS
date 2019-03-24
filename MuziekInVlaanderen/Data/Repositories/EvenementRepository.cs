@@ -47,7 +47,7 @@ namespace MuziekInVlaanderen.Data.Repositories
 
         public bool TryGetEvenement(int id, out Evenement evenement)
         {
-            evenement = _context.Evenementen.Include(e => e.Locatie).Include(e => e.Categorie).FirstOrDefault(e => e.Id == id);
+            evenement = _context.Evenementen.FirstOrDefault(e => e.Id == id);
             return evenement != null;
         }
 

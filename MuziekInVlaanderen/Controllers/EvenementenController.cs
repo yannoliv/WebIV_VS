@@ -26,5 +26,13 @@ namespace MuziekInVlaanderen.Controllers
             return _evenementRepository.GetAll();
         }
 
+        [HttpGet("{id}")]
+        public ActionResult<Evenement> GetEvenement(int id)
+        {
+            Evenement evenement = _evenementRepository.GetBy(id);
+            if (evenement == null) return NotFound();
+            return evenement;
+        }
+
     }
 }
