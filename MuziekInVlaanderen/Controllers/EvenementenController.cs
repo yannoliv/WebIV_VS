@@ -44,7 +44,7 @@ namespace MuziekInVlaanderen.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult putEvenement(int id, Evenement evenement)
+        public IActionResult PutEvenement(int id, Evenement evenement)
         {
             if (id != evenement.Id)
             {
@@ -54,6 +54,16 @@ namespace MuziekInVlaanderen.Controllers
             _evenementRepository.Update(evenement);
             _evenementRepository.SaveChanges();
             return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Evenement> DeleteEvenement(int id)
+        {
+            Evenement evenement = _evenementRepository.GetBy(id);
+            if (evenement == null) return NotFound();
+            _evenementRepository.Delete(evenement);
+            _evenementRepository.SaveChanges();
+            return evenement;
         }
 
     }
