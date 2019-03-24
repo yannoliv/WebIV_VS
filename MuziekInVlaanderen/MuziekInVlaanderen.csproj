@@ -4,6 +4,7 @@
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <StartupObject>MuziekInVlaanderen.Program</StartupObject>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <UserSecretsId>a663a8f5-2198-4b54-9449-4f78107ac1b0</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
