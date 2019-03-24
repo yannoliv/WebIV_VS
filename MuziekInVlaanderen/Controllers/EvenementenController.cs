@@ -34,5 +34,14 @@ namespace MuziekInVlaanderen.Controllers
             return evenement;
         }
 
+
+        [HttpPost]
+        public ActionResult<Evenement> PostEvenement(Evenement evenement)
+        {
+            _evenementRepository.Add(evenement);
+            _evenementRepository.SaveChanges();
+            return CreatedAtAction(nameof(GetEvenement), new { id = evenement.Id }, evenement);
+        }
+
     }
 }
