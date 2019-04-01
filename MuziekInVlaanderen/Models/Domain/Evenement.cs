@@ -13,26 +13,113 @@ namespace MuziekInVlaanderen.Models.Domain
         public string Titel { get; set; }
 
         [Required]
-        public Categorie Categorie { get; set; }
-
-        [Required]
-        public Plaats Locatie { get; set; }
-
-        [Required]
         public string Beschrijving { get; set; }
 
         [Required]
-        public DateTime Datum { get; set; } 
+        public Moment[] Moment { get; set; }
+
+        [Required]
+        public Locatie Locatie { get; set; }
+
+        [Required]
+        public Categorie Categorie { get; set; }
+
+        public Gallerij Gallerij { get; set; }
+
+        public string[] SocialMedia { get; set; }
+
+        public string ProfielFoto { get; set; }
+
+        public string OmslagFoto { get; set; }
+
+        public double? Prijs { get; set; }
+
+
         #endregion
 
-        public Evenement(string titel, Categorie categorie, Plaats locatie, string beschrijving, DateTime datum)
+        #region Constructors
+
+        public Evenement(string titel, string beschrijving, Moment[] momenten, Locatie locatie, Categorie categorie)
+            :this(titel, beschrijving, momenten, locatie, categorie, null,null,null,null,null)
+        { }
+
+        public Evenement(string titel, string beschrijving, Moment[] momenten, Locatie locatie,  Categorie categorie, Gallerij gallerij, string[] socialMedia, string profielFoto, string omslagFoto, double? prijs)
         {
-            Titel = titel;
+            if (titel != null || titel.Length > 0)
+                Titel = titel;
+            else
+                throw new ArgumentException("De titel mag niet leeg zijn.");
+
+            if (beschrijving != null || beschrijving.Length > 0)
+                Beschrijving = beschrijving;
+            else
+                throw new ArgumentException("De beschrijving mag niet leeg zijn.");
+
+            if (momenten != null)
+                Moment = momenten;
+            
             Categorie = categorie;
-            Locatie = locatie;
-            Beschrijving = beschrijving;
-            Datum = datum;
+
+            /* Properties die null mogen zijn */
+            Gallerij = gallerij;
+            SocialMedia = socialMedia;
+            ProfielFoto = profielFoto;
+            OmslagFoto = omslagFoto;
+            Prijs = prijs;
         }
+
+        #endregion
 
     }
 }
+
+/*
+
+ public class evenement{
+
+- titel: string
+- descriptie: string
+- datums Datum[]
+- locatie: Locatie
+- gallerij: Gallerij
+- socialMedia: string[]
+- profielFoto: string
+- omslagFoto: string
+- prijs: double
+
+}
+
+
+public class Datum{
+
+- datum: Date
+- BeginUur: TimeSpan
+- EindUur: TimeSpan
+
+}
+
+public class Locatie{
+
+- postcode: string
+- straat: string
+- gemeente: string
+
+}
+
+public class Gallerij{
+
+- fotograaf: Fotograaf
+- fotos: string[]
+
+}
+
+public class Fotograaf{
+
+- naam: string
+- afbeelding: string
+- socialmedia: string[]
+
+}
+     
+     
+     */

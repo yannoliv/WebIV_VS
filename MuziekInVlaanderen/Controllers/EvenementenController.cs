@@ -1,14 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.HttpSys;
 using MuziekInVlaanderen.Models.Domain;
 
 namespace MuziekInVlaanderen.Controllers
 {
+    [Produces("application/json")]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     [ApiController]
     public class EvenementenController : ControllerBase
     {
@@ -24,6 +30,7 @@ namespace MuziekInVlaanderen.Controllers
         /// </summary>
         /// <returns>Het evenement</returns>
         [HttpGet]
+        [AllowAnonymous]
         public IEnumerable<Evenement> GetEvenementen()
         {
             return _evenementRepository.GetAll();
@@ -35,6 +42,7 @@ namespace MuziekInVlaanderen.Controllers
         /// <param name="id">Het Id van het evenement</param>
         /// <returns>Het evenement</returns>
         [HttpGet("{id}")]
+        [AllowAnonymous]
         public ActionResult<Evenement> GetEvenement(int id)
         {
             Evenement evenement = _evenementRepository.GetBy(id);

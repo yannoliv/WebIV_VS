@@ -21,15 +21,16 @@ namespace MuziekInVlaanderen.Controllers
     {
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        private readonly ICustomerRepository _customerRepository;
+        //private readonly ICustomerRepository _customerRepository;
         private readonly IConfiguration _config;
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager,
-                                ICustomerRepository customerRepository, Configuration config)
+        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager
+                                //,ICustomerRepository customerRepository, Configuration config
+                                )
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            _customerRepository = customerRepository;
-            _config = config;
+            //_customerRepository = customerRepository;
+            //_config = config;
         }
 
         [AllowAnonymous]
@@ -59,5 +60,38 @@ namespace MuziekInVlaanderen.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
 
         }
+        /*
+        [AllowAnonymous]
+        [HttpPost("register")]
+        public async Task<ActionResult<String>> Register(RegisterDTOmodel)
+        {
+            IdentityUser user = new IdentityUser {
+                UserName = model.Email,
+                Email = model.Email
+            };
+            Customer customer = new Customer {
+                Email = model.Email,
+                FirstName = model.FirstName,
+                LastName = model.LastName
+            };
+            var result = await_userManager.CreateAsync(user, model.Password);
+            if (result.Succeeded) {
+                _customerRepository.Add(customer);
+                _customerRepository.SaveChanges();
+                string token = GetToken(user);
+                return Created("", token);
+            }
+
+            return BadRequest();
+        }
+
+        [HttpGet("Favorites")]
+        public IEnumerable<Recipe> GetFavorites()
+        {
+            Customer customer = _customerRepository.GetBy(User.Identity.Name);
+            return customer.FavoriteRecipes;
+        }
+        */
+
     }
 }

@@ -26,13 +26,53 @@ namespace MuziekInVlaanderenAPI.Data
             if (_dbContext.Database.EnsureCreated())
             {
                 var lijstEvenementen = new List<Evenement>() {
-                new Evenement("Michael Bublé with the Classics",Categorie.Klassiek, Plaats.Aalst, BESCHRIJVING, new DateTime(2019,5,18)),
-                new Evenement("Op de lijn met Pascal Cruque", Categorie.VoorDeHeleFamilie, Plaats.Brugge, BESCHRIJVING, new DateTime(2019, 9, 10)),
-                new Evenement("De grote opera van Jaque DePicanté", Categorie.Klassiek, Plaats.Antwerpen, BESCHRIJVING, new DateTime(2020, 1, 12)),
-                new Evenement("Zware Rock en Roll en Heavy Metal", Categorie.RockAndMetal, Plaats.Antwerpen, BESCHRIJVING, new DateTime(2019, 6, 9)),
-                new Evenement("Pinto de Janero", Categorie.Pop, Plaats.Gent, BESCHRIJVING, new DateTime(2019, 6, 15)),
-                new Evenement("Axel et le petit Trompet", Categorie.Klassiek, Plaats.Gent, BESCHRIJVING, new DateTime(2019, 8, 18))
-            };
+                    new Evenement("Michael Bublé with the Classics",BESCHRIJVING,
+                        new Moment[]{
+                            new Moment(new DateTime(2019,10,12), new TimeSpan(6,30,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,10,13), new TimeSpan(5,0,0), new TimeSpan(11,0,0))}
+                        , new Locatie("6000", "Rionero", "Antwerpen"), Categorie.Classic
+                    ),
+                    new Evenement("Trevéro De la Casa",BESCHRIJVING,
+                        new Moment[]{
+                            new Moment(new DateTime(2020,1,14), new TimeSpan(6,0,0), new TimeSpan(9,30,0)),
+                            new Moment(new DateTime(2020,1,15), new TimeSpan(6,0,0), new TimeSpan(10,30,0)),
+                            new Moment(new DateTime(2020,1,16), new TimeSpan(6,0,0), new TimeSpan(10,30,0))}
+                        , new Locatie("7000", "De gildeweg", "Brussel"), Categorie.Classic
+                    ),
+                    new Evenement("Punk Rock",BESCHRIJVING,
+                        new Moment[]{
+                            new Moment(new DateTime(2019,9,19), new TimeSpan(7,0,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,9,20), new TimeSpan(7,0,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,9,21), new TimeSpan(7,0,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,9,22), new TimeSpan(7,0,0), new TimeSpan(10,0,0))
+}
+                        , new Locatie("5500", "Lange ZoutStraat", "Gent"), Categorie.Rock
+                    ),
+                    new Evenement("New Wave 19",BESCHRIJVING,
+                        new Moment[]{
+                            new Moment(new DateTime(2019,9,19), new TimeSpan(8,0,0), new TimeSpan(11,40,0))}
+                        , new Locatie("9000", "Welleweg", "Gent"), Categorie.EMD
+                    ),
+                    new Evenement("Slow guitar evening",BESCHRIJVING,
+                        new Moment[]{
+                            new Moment(new DateTime(2019,11,8), new TimeSpan(7,0,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,11,9), new TimeSpan(7,0,0), new TimeSpan(10,30,0))}
+                        , new Locatie("7100", "Halve Maatweg", "Brussel"), Categorie.Acoustic
+                    ),
+                    new Evenement("The Beatles revamp",BESCHRIJVING,
+                        new Moment[]{
+                            new Moment(new DateTime(2019,09,5), new TimeSpan(7,0,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,09,6), new TimeSpan(7,0,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,09,7), new TimeSpan(7,0,0), new TimeSpan(10,0,0)),
+                            new Moment(new DateTime(2019,09,8), new TimeSpan(7,0,0), new TimeSpan(10,0,0))}
+                        , new Locatie("6500", "Volksplein", "Antwerpen"), Categorie.Nineties
+                    ),
+                    new Evenement("Skrillex dnb dubstep",BESCHRIJVING,
+                        new Moment[]{
+                            new Moment(new DateTime(2019,10,19), new TimeSpan(9,0,0), new TimeSpan(10,0,0))}
+                        , new Locatie("9300", "Italienweg", "Aalst"), Categorie.EMD
+                    )
+                };
                 _dbContext.Evenementen.AddRange(lijstEvenementen);
                 _dbContext.SaveChanges();
             }

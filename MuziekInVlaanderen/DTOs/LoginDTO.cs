@@ -14,5 +14,6 @@ namespace MuziekInVlaanderen.DTOs
 
         [Required]
         public string Password { get; set; }
+        
     }
 }
