@@ -32,7 +32,7 @@ namespace MuziekInVlaanderen.Data.Repositories
         public IEnumerable<Evenement> GetAll()
         {
             Console.Write(_evenementen);
-            return this._evenementen.Include(e => e.Gallerij).Include(e => e.Locatie).Include(e => e.Moment).ToList();
+            return this._evenementen.Include(e => e.Gallerij).Include(e => e.Gallerij.Fotograaf).Include(e => e.Locatie).Include(e => e.Moment).ToList();
         }
 
         public Evenement GetBy(int id)

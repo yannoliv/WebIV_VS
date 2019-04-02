@@ -12,11 +12,10 @@ namespace MuziekInVlaanderen.Data.Mappers
     {
         public void Configure(EntityTypeBuilder<Gallerij> builder)
         {
-            builder.ToTable("Gallerij");
-            builder.HasKey(g => g.Id);
-            builder.Property(g => g.Fotos).IsRequired();
+            builder.ToTable("Gallerijen");
+            builder.HasKey(e => e.Id);
 
-            builder.HasOne(g => g.Evenement).WithOne(e => e.Gallerij).OnDelete(DeleteBehavior.SetNull);
+            builder.HasOne(g => g.Fotograaf).WithMany(f => f.Gallerijen).OnDelete(DeleteBehavior.SetNull);
         }
     }
 }

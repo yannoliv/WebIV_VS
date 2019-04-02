@@ -9,7 +9,7 @@ namespace MuziekInVlaanderen.Models.Domain
     public class Evenement
     {
         #region Properties
-        [Key]
+
         public int Id { get; set; }
 
         [Required]
@@ -65,6 +65,11 @@ namespace MuziekInVlaanderen.Models.Domain
 
             if (momenten != null)
                 Moment = momenten;
+
+            if (locatie != null)
+                Locatie = locatie;
+            else
+                throw new ArgumentException("De locatie mag niet leeg zijn.");
             
             Categorie = categorie;
 

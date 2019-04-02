@@ -21,7 +21,10 @@ namespace MuziekInVlaanderen.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            
             modelBuilder.ApplyConfiguration(new EvenementConfiguration());
+            modelBuilder.ApplyConfiguration(new GallerijConfiguration());
+
         }
 
     }

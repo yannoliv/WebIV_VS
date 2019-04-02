@@ -12,10 +12,13 @@ namespace MuziekInVlaanderen.Models.Domain
         public string Naam { get; set; }
         public string ProfielFoto { get; set; }
 
+        public List<Gallerij> Gallerijen { get; set; }
+
         [NotMapped]
         public List<String> SocialMedia { get; set; }
-
         public string SocialMediaString { get { return SocialMedia != null ? String.Join(',', SocialMedia) : null; } set { if (value != null) { SocialMedia = value.Split(',').ToList(); } } }
+        
+        private Fotograaf() { }
 
         public Fotograaf(string naam, string profielFoto, List<String> socialMedia)
         {
@@ -25,9 +28,5 @@ namespace MuziekInVlaanderen.Models.Domain
             SocialMedia = socialMedia;
         }
 
-        private Fotograaf()
-        {
-
-        }
     }
 }
