@@ -1,9 +1,12 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace MuziekInVlaanderen.Models.Domain
 {
     public class Moment
     {
+        [Key]
+        public int Id { get; set; }
         public DateTime Datum { get; set; }
         public TimeSpan BeginUur { get; set; }
         public TimeSpan EindUur { get; set; }
@@ -20,5 +23,7 @@ namespace MuziekInVlaanderen.Models.Domain
                 throw new ArgumentException("De data voor het moment is foutief ingevuld. ");
             }
         }
+
+        private Moment() { }
     }
 }

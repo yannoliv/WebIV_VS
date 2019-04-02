@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace MuziekInVlaanderen.Models.Domain
 {
@@ -16,7 +19,7 @@ namespace MuziekInVlaanderen.Models.Domain
         public string Beschrijving { get; set; }
 
         [Required]
-        public Moment[] Moment { get; set; }
+        public List<Moment> Moment { get; set; }
 
         [Required]
         public Locatie Locatie { get; set; }
@@ -26,7 +29,10 @@ namespace MuziekInVlaanderen.Models.Domain
 
         public Gallerij Gallerij { get; set; }
 
-        public string[] SocialMedia { get; set; }
+        [NotMapped]
+        public List<String> SocialMedia { get; set; }
+        
+        public string SocialMediaString { get { return SocialMedia!=null?String.Join(',', SocialMedia):null; } set { if (value != null) { SocialMedia = value.Split(',').ToList(); } } }
 
         public string ProfielFoto { get; set; }
 
@@ -39,11 +45,13 @@ namespace MuziekInVlaanderen.Models.Domain
 
         #region Constructors
 
-        public Evenement(string titel, string beschrijving, Moment[] momenten, Locatie locatie, Categorie categorie)
+        private Evenement() { }
+
+        public Evenement(string titel, string beschrijving, List<Moment> momenten, Locatie locatie, Categorie categorie)
             :this(titel, beschrijving, momenten, locatie, categorie, null,null,null,null,null)
         { }
 
-        public Evenement(string titel, string beschrijving, Moment[] momenten, Locatie locatie,  Categorie categorie, Gallerij gallerij, string[] socialMedia, string profielFoto, string omslagFoto, double? prijs)
+        public Evenement(string titel, string beschrijving, List<Moment> momenten, Locatie locatie,  Categorie categorie, Gallerij gallerij, List<String> socialMedia, string profielFoto, string omslagFoto, double? prijs)
         {
             if (titel != null || titel.Length > 0)
                 Titel = titel;

@@ -17,7 +17,10 @@ namespace MuziekInVlaanderen.Data.Mappers
             builder.Property(e => e.Titel).IsRequired().HasMaxLength(100);
             builder.Property(e => e.Beschrijving).IsRequired();
             builder.Property(e => e.Categorie).IsRequired();
-            builder.Property(e => e.Locatie).IsRequired();
+
+            builder.HasOne(e => e.Locatie).WithOne().HasForeignKey<Locatie>(e => e.EvenementId).IsRequired().OnDelete(DeleteBehavior.Restrict);
+            builder.HasOne(e => e.Gallerij).WithOne().HasForeignKey<Gallerij>(e => e.EvenementId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(e => e.Moment).WithOne().IsRequired().OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

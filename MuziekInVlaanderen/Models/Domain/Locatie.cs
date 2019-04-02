@@ -1,12 +1,18 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace MuziekInVlaanderen.Models.Domain
 {
     public class Locatie
     {
+        public int Id { get; set; }
         public string Postcode { get; set; }
         public string Straat { get; set; }
         public string Gemeente { get; set; }
+
+        public int EvenementId { get; set; }
+        public Evenement Evenement { get; set; }
 
         public Locatie(string postcode, string straat, string gemeente)
         {
@@ -21,5 +27,7 @@ namespace MuziekInVlaanderen.Models.Domain
                 throw new ArgumentException("Je mag geen lege postcode, straat of gemeente mee geven. ");
             }
         }
+
+        private Locatie() { }
     }
 }
