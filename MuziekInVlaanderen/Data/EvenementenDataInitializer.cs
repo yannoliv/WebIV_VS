@@ -1,4 +1,5 @@
-﻿using MuziekInVlaanderen.Data;
+﻿using Microsoft.AspNetCore.Identity;
+using MuziekInVlaanderen.Data;
 using MuziekInVlaanderen.Models.Domain;
 using System;
 using System.Collections.Generic;
@@ -11,20 +12,24 @@ namespace MuziekInVlaanderenAPI.Data
     {
 
         private readonly ApplicationDbContext _dbContext;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public EvenementenDataInitializer(ApplicationDbContext dbContext)
+        public EvenementenDataInitializer(ApplicationDbContext dbContext, UserManager<IdentityUser> userManager)
         {
             _dbContext = dbContext;
+            _userManager = userManager;
         }
 
 
-        public void InitializeData()
+        public async Task InitializeDataAsync()
         {
             const String BESCHRIJVING = "Is at purse tried jokes china ready decay an. Small its shy way had woody downs power. To denoting admitted speaking learning my exercise so in. Procured shutters mr it feelings. To or three offer house begin taken am at. As dissuade cheerful overcame so of friendly he indulged unpacked. Alteration connection to so as collecting me. Difficult in delivered extensive at direction allowance. Alteration put use diminution can considered sentiments interested discretion. An seeing feebly stairs am branch income me unable.";
 
             _dbContext.Database.EnsureDeleted();
             if (_dbContext.Database.EnsureCreated())
             {
+
+                // Evenementen aanmaken 
                 var lijstEvenementen = new List<Evenement>() {
                     new Evenement("Michael Bublé with the Classics",BESCHRIJVING,
                         new List<Moment>{
@@ -80,7 +85,23 @@ namespace MuziekInVlaanderenAPI.Data
                 };
                 _dbContext.Evenementen.AddRange(lijstEvenementen);
                 _dbContext.SaveChanges();
+
+                // Customers maken
+                Customer customer = new Customer { Email = "recipemaster@hogent.be", FirstName = "Adam", LastName = "Master" };
+                _dbContext.Customers.Add(customer);
+                await CreateUser(customer.Email, "P@ssword1111");
+                Customer student = new Customer { Email = "student@hogent.be", FirstName = "Student", LastName = "Hogent" };
+                _dbContext.Customers.Add(student);
+                student.AddFavoriteEvenement(_dbContext.Evenementen.First());
+                await CreateUser(student.Email, "P@ssword1111");
+                _dbContext.SaveChanges();
             }
+        }
+
+        private async Task CreateUser(string email, string password)
+        {
+            var user = new IdentityUser { UserName = email, Email = email };
+            await _userManager.CreateAsync(user, password);
         }
     }
 }

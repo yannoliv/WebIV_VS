@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using MuziekInVlaanderen.DTOs;
+using MuziekInVlaanderen.Models.Domain;
 
 namespace MuziekInVlaanderen.Controllers
 {
@@ -19,20 +20,24 @@ namespace MuziekInVlaanderen.Controllers
     [ApiController]
     public class AccountController : ControllerBase
     {
+        
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
-        //private readonly ICustomerRepository _customerRepository;
+        private readonly ICustomerRepository _customerRepository;
         private readonly IConfiguration _config;
-        public AccountController(SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager
-                                //,ICustomerRepository customerRepository, Configuration config
-                                )
+        public AccountController( SignInManager<IdentityUser> signInManager, UserManager<IdentityUser> userManager
+                                ,ICustomerRepository customerRepository, IConfiguration config )
         {
             _signInManager = signInManager;
             _userManager = userManager;
-            //_customerRepository = customerRepository;
-            //_config = config;
+            _customerRepository = customerRepository;
+            _config = config;
         }
 
+        /// <summary>
+        /// Login
+        /// </summary>
+        /// <param name="model">the login details</param>
         [AllowAnonymous]
         [HttpPost]
         public async Task<ActionResult<String>> CreateToken(LoginDTO model)
@@ -60,10 +65,15 @@ namespace MuziekInVlaanderen.Controllers
             return new JwtSecurityTokenHandler().WriteToken(token);
 
         }
-        /*
+
+        /// <summary>
+        /// Register a user
+        /// </summary>
+        /// <param name="model">the user details</param>
+        /// <returns></returns>
         [AllowAnonymous]
         [HttpPost("register")]
-        public async Task<ActionResult<String>> Register(RegisterDTOmodel)
+        public async Task<ActionResult<String>> Register(RegisterDTO model)
         {
             IdentityUser user = new IdentityUser {
                 UserName = model.Email,
@@ -74,7 +84,7 @@ namespace MuziekInVlaanderen.Controllers
                 FirstName = model.FirstName,
                 LastName = model.LastName
             };
-            var result = await_userManager.CreateAsync(user, model.Password);
+            var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded) {
                 _customerRepository.Add(customer);
                 _customerRepository.SaveChanges();
@@ -85,13 +95,18 @@ namespace MuziekInVlaanderen.Controllers
             return BadRequest();
         }
 
-        [HttpGet("Favorites")]
-        public IEnumerable<Recipe> GetFavorites()
+        /// <summary>
+        /// Checks if an email is available as username
+        /// </summary>
+        /// <returns>true if the email is not registered yet</returns>
+        /// <param name="email">Email.</param>/
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public async Task<ActionResult<Boolean>> CheckAvailableUserName(string email)
         {
-            Customer customer = _customerRepository.GetBy(User.Identity.Name);
-            return customer.FavoriteRecipes;
+            var user = await _userManager.FindByNameAsync(email);
+            return user == null;
         }
-        */
 
     }
 }
