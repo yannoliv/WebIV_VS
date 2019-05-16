@@ -121,14 +121,11 @@ namespace MuziekInVlaanderenAPI.Data
                 _dbContext.Evenementen.AddRange(lijstEvenementen);
                 _dbContext.SaveChanges();
 
-                // Customers maken
-                Customer customer = new Customer { Email = "recipemaster@hogent.be", FirstName = "Adam", LastName = "Master" };
-                _dbContext.Customers.Add(customer);
-                await CreateUser(customer.Email, "P@ssword1111");
-                Customer student = new Customer { Email = "student@hogent.be", FirstName = "Student", LastName = "Hogent" };
+                // Accounts maken
+                Customer student = new Customer { Email = "yann@gmail.com", FirstName = "Student", LastName = "Hogent" };
                 _dbContext.Customers.Add(student);
-                student.AddFavoriteEvenement(_dbContext.Evenementen.First());
-                await CreateUser(student.Email, "P@ssword1111");
+                await CreateUser(student.Email, "P@ssword1");
+                //meneer.AddFavoriteEvenement(_dbContext.Evenementen.First());
                 _dbContext.SaveChanges();
             }
         }
