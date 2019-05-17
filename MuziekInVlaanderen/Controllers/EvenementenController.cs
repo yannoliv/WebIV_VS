@@ -25,16 +25,32 @@ namespace MuziekInVlaanderen.Controllers
             Console.Write(_evenementRepository.GetAll());
         }
 
+        // GET: api/Evenementen
         /// <summary>
         /// Get alle evenementen
         /// </summary>
-        /// <returns>Het evenement</returns>
+        /// <returns>array of recipes</returns>
+
         [HttpGet]
-        [AllowAnonymous]
-        public IEnumerable<Evenement> GetEvenementen()
+        public IEnumerable<Evenement> GetEvenementen(string name = null, string categorie = null, string plaats = null)
         {
-            return _evenementRepository.GetAll();
+            if (string.IsNullOrEmpty(name) && string.IsNullOrEmpty(categorie) && string.IsNullOrEmpty(plaats))
+                return _evenementRepository.GetAll();
+            return _evenementRepository.GetBy(name, categorie, plaats);
         }
+
+        /// <summary>
+        /// Get 3 eerstvolgende evenementen
+        /// </summary>
+        /// <returns>De 3 eerstvolgende evenementen</returns>
+        [HttpGet("eerstvolgende")]
+        [AllowAnonymous]
+        public IEnumerable<Evenement> GetEerstvolgendeEvenementen()
+        {
+            return _evenementRepository.GetAll().OrderBy(e => e.Moment[0].Datum).Take(3);
+        }
+
+
 
         /// <summary>
         /// Get evenement via Id

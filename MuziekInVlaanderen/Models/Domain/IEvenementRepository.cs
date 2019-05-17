@@ -10,9 +10,9 @@ namespace MuziekInVlaanderen.Models.Domain
         void Add(Evenement e);
         void Delete(Evenement e);
         IEnumerable<Evenement> GetAll();
+        IEnumerable<Evenement> GetBy(string name = null, string categorie = null, string plaats = null);
         Evenement GetBy(int id);
         void SaveChanges();
-        bool TryGetEvenement(int id, out Evenement e);
         void Update(Evenement e);
 
     }

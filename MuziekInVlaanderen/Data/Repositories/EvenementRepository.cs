@@ -50,6 +50,25 @@ namespace MuziekInVlaanderen.Data.Repositories
                 .SingleOrDefault(e => e.Id == id);
         }
 
+        public IEnumerable<Evenement> GetBy(string name = null, string categorie = null, string plaats = null)
+        {
+            // evenementen includen.
+            var evenementen = _evenementen
+                .Include(e => e.Gallerij)
+                    .ThenInclude(g => g.Fotograaf)
+                .Include(e => e.Locatie)
+                .Include(e => e.Moment)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(name))
+                evenementen = evenementen.Where(e => e.Titel.IndexOf(name, System.StringComparison.OrdinalIgnoreCase) >= 0);
+            if (!string.IsNullOrEmpty(categorie))
+                evenementen = evenementen.Where(e => e.Categorie.ToString().Equals(categorie, System.StringComparison.OrdinalIgnoreCase));
+            if (!string.IsNullOrEmpty(plaats))
+                evenementen = evenementen.Where(r => r.Locatie.Gemeente.Equals(plaats, System.StringComparison.OrdinalIgnoreCase));
+            return evenementen.OrderBy(r => r.Moment[0].Datum).ToList();
+        }
+
         public void SaveChanges()
         {
             this._context.SaveChanges();
