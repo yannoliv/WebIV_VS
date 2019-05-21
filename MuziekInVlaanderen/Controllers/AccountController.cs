@@ -116,7 +116,7 @@ namespace MuziekInVlaanderen.Controllers
         /// <returns>true if the email is not registered yet</returns>
         /// <param name="email">Email.</param>/
         [AllowAnonymous]
-        [HttpGet("checkusername")]
+        [HttpGet("checkemail")]
         public async Task<ActionResult<Boolean>> CheckAvailableEmail(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
