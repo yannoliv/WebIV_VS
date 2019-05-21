@@ -8,7 +8,7 @@ namespace MuziekInVlaanderen.Models.Domain
     public class Gallerij
     {
         public int Id { get; set; }
-        
+       
         public Fotograaf Fotograaf { get; set; }
 
         [NotMapped]

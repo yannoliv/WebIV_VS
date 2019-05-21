@@ -15,7 +15,7 @@ namespace MuziekInVlaanderen.Data.Mappers
             builder.ToTable("Gallerijen");
             builder.HasKey(e => e.Id);
 
-            builder.HasOne(g => g.Fotograaf).WithMany().OnDelete(DeleteBehavior.SetNull);
+            //builder.HasOne(g => g.Fotograaf).WithMany().HasForeignKey(f => f.FotograafId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

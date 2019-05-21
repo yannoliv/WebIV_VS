@@ -18,21 +18,10 @@ namespace MuziekInVlaanderen.Data.Repositories
             _customers = dbContext.Customers;
         }
 
-        public Customer GetBy(string email)
+        public Customer GetBy(string username)
         {
             return _customers
-                .Include(x => x.FavoriteEvenementen)
-                .Include(c => c.Favorites)
-                    .ThenInclude(f => f.Evenement)
-                        .ThenInclude(e => e.Gallerij)
-                            .ThenInclude(g => g.Fotograaf)
-                .Include(c => c.Favorites)
-                    .ThenInclude(f => f.Evenement)
-                        .ThenInclude(e => e.Locatie)
-                .Include(c => c.Favorites)
-                    .ThenInclude(f => f.Evenement)
-                        .ThenInclude(e => e.Moment)
-                .SingleOrDefault(c => c.Email == email);
+                .SingleOrDefault(c => c.Username == username);
         }
 
         public void Add(Customer customer)

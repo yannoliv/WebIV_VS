@@ -122,17 +122,17 @@ namespace MuziekInVlaanderenAPI.Data
                 _dbContext.SaveChanges();
 
                 // Accounts maken
-                Customer student = new Customer { Email = "yann@gmail.com", FirstName = "Student", LastName = "Hogent" };
+                Customer student = new Customer { Username = "web4",Email = "yann@gmail.com", FirstName = "Yannick", LastName = "Olivier" };
                 _dbContext.Customers.Add(student);
-                await CreateUser(student.Email, "P@ssword1");
+                await CreateUser(student.Username ,student.Email, "gelukkiggeennetbeans");
                 //meneer.AddFavoriteEvenement(_dbContext.Evenementen.First());
                 _dbContext.SaveChanges();
             }
         }
 
-        private async Task CreateUser(string email, string password)
+        private async Task CreateUser(string username, string email, string password)
         {
-            var user = new IdentityUser { UserName = email, Email = email };
+            var user = new IdentityUser { UserName = username, Email = email };
             await _userManager.CreateAsync(user, password);
         }
     }

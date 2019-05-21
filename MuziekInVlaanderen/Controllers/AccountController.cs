@@ -42,7 +42,7 @@ namespace MuziekInVlaanderen.Controllers
         [HttpPost]
         public async Task<ActionResult<String>> CreateToken(LoginDTO model)
         {
-            var user = await _userManager.FindByNameAsync(model.Email); if (user != null)
+            var user = await _userManager.FindByNameAsync(model.Username); if (user != null)
             {
                 var result = await _signInManager.CheckPasswordSignInAsync(user, model.Password, false); if (result.Succeeded)
                 {
@@ -76,13 +76,14 @@ namespace MuziekInVlaanderen.Controllers
         public async Task<ActionResult<String>> Register(RegisterDTO model)
         {
             IdentityUser user = new IdentityUser {
-                UserName = model.Email,
+                UserName = model.Username,
                 Email = model.Email
             };
             Customer customer = new Customer {
                 Email = model.Email,
                 FirstName = model.FirstName,
-                LastName = model.LastName
+                LastName = model.LastName,
+                Username = model.Username
             };
             var result = await _userManager.CreateAsync(user, model.Password);
             if (result.Succeeded) {
@@ -102,11 +103,24 @@ namespace MuziekInVlaanderen.Controllers
         /// <param name="email">Email.</param>/
         [AllowAnonymous]
         [HttpGet("checkusername")]
-        public async Task<ActionResult<Boolean>> CheckAvailableUserName(string email)
+        public async Task<ActionResult<Boolean>> CheckAvailableUserName(string username)
         {
-            var user = await _userManager.FindByNameAsync(email);
+            var user = await _userManager.FindByNameAsync(username);
             return user == null;
         }
 
+
+        /// <summary>
+        /// Checks if an email is available as username
+        /// </summary>
+        /// <returns>true if the email is not registered yet</returns>
+        /// <param name="email">Email.</param>/
+        [AllowAnonymous]
+        [HttpGet("checkusername")]
+        public async Task<ActionResult<Boolean>> CheckAvailableEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            return user == null;
+        }
     }
 }

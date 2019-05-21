@@ -20,7 +20,6 @@ namespace MuziekInVlaanderen.DTOs
             FirstName = customer.FirstName;
             LastName = customer.LastName;
             Email = customer.Email;
-            Evenementen = customer.FavoriteEvenementen;
         }
     }
 }

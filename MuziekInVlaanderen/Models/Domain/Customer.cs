@@ -17,23 +17,18 @@ namespace MuziekInVlaanderen.Models.Domain
 
         public string Email { get; set; }
 
-        public ICollection<CustomerFavorite> Favorites { get; private set; }
+        public string Username { get; set; }
 
-        public IEnumerable<Evenement> FavoriteEvenementen => Favorites.Select(f => f.Evenement);
         #endregion
 
         #region Constructors
         public Customer()
         {
-            Favorites = new List<CustomerFavorite>();
         }
         #endregion
 
         #region Methods
-        public void AddFavoriteEvenement(Evenement evenement)
-        {
-            Favorites.Add(new CustomerFavorite() { EvenementId = evenement.Id, CustomerId = CustomerId, Evenement = evenement, Customer = this });
-        }
+
         #endregion
     }
 }
